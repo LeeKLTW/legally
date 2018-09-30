@@ -60,8 +60,14 @@ For example,in  this category['行政院本部消費者保護目'](https://law.m
 
 # Dependency
 MySQL
+requests
 
-requiement.txt
+
+jieba
+
+gensim
+
+(requiement.txt)
 
 # Insallation
 
