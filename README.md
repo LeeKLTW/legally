@@ -1,4 +1,4 @@
-# Why I start this project
+#1 Why I start this project
 
 ## 法律遵循
 
@@ -77,3 +77,6 @@ gensim
 
 # Work in progress
   - [ ] todolist
+  - [ ] parse the words
+  - [ ] embedding
+ 
