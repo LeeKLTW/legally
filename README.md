@@ -59,16 +59,10 @@ For example,in  this category['行政院本部消費者保護目'](https://law.m
 
 
 # Dependency
-
 MySQL
-requests
 
-
-jieba
-
-gensim
-(Recently using virtualenv for enviroment management. Migrating to docker.)
 (requiement.txt)
+(Recently using virtualenv for enviroment management. Migrating to docker.)
 
 # Insallation
 
@@ -79,4 +73,4 @@ gensim
 # Work in progress
   - [ ] parse the words
   - [ ] embedding
-  - [ ] migrate to docker
+  - [ ] migrate to docker 
