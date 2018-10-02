@@ -1,8 +1,7 @@
 # Why I start this project
+減少法律遵循人力需求
 
-## 法律遵循
-
-## 公文格式審核人力
+減少公文格式審核人力
 
 # Technical possibility
 

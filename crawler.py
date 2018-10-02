@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from bs4 import BeautifulSoup
 from itertools import cycle
@@ -6,12 +7,12 @@ import argparse
 import pymysql
 FLAGS = None
 
-def __read_targets_from_json():
-    pass
+def __read_targets_from_json__():
+    return list(json.loads(''.join([line for line in open('targets.json','r',encoding="UTF8")])).values())
 
 def __get_links__(url):
     """
-    url: string. 組改後法規類目別網址。e.g.行政院院本部消費者保護目https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04001004
+    url_list: string. 組改後法規類目別網址。e.g.行政院院本部消費者保護目https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04001004
     """
     html = requests.get(url).text
     soup = BeautifulSoup(html,'html.parser')
@@ -19,6 +20,9 @@ def __get_links__(url):
     return links
 
 def __get_law_content__(url):
+    """
+    
+    """
     html = requests.get(url).text
     soup = BeautifulSoup(html,'html.parser')
     title = soup.select('div#Content a')[2].text
@@ -27,14 +31,12 @@ def __get_law_content__(url):
     return [i for i in zip(cycle([title]),number,content)]
 
 
-def __write_into_mysql__(law_content):
+def __write_into_mysql__(host,port,user,password):
     """Write the information of article into MongoDB.
     Args:
-        posts: dict. The information of article.
-        host: str. The host of MongoDB.
-        port: int.The port of MongoDB.
+        
     Returns:
-        None
+        
     """
     conn = pymysql.Connection(host='localhost',port=3306,user='root',password='',charset='utf8') # utf8 to correct encoding    collection = client.get_database('AI_news_tracker').get_collection('article')
     cur = conn.cursor()
