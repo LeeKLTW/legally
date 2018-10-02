@@ -1,9 +1,13 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from itertools import cycle
 import argparse
 import pymysql
 FLAGS = None
+
+def __read_targets_from_json():
+    pass
 
 def __get_links__(url):
     """
@@ -88,16 +92,3 @@ if __name__ == '__main__':
     FLAGS, unparsed = parser.parse_known_args()
     main(FLAGS.url,FLAGS.layout_type,FLAGS.host,FLAGS.port)
 
-
-
-
-
-
-
-
-
-
-
-
-if __name__ =='__main__':
-    pass
