@@ -61,7 +61,16 @@ For example,in  this category['行政院本部消費者保護目'](https://law.m
 # Dependency
 MySQL
 
-(requiement.txt)
+pip install -r requirement.txt
+(requirement.txt)
+```
+certifi==2018.8.24
+chardet==3.0.4
+idna==2.7
+requests==2.19.1
+urllib3==1.23
+```
+
 (Recently using virtualenv for enviroment management. Migrating to docker.)
 
 # Insallation
