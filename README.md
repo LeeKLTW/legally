@@ -89,7 +89,45 @@ Scheme
 | ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
+很棒棒
+
+![w2v](https://imgur.com/69UZOjU.jpg)
+
+負面金錢往來
+
+![w2v](https://imgur.com/utUNyDS.jpg)
+
+死亡、艱難等負面字眼
+
+![w2v](https://imgur.com/rpE5YKi.jpg)
+
+英文字母
+
+![w2v](https://imgur.com/F15vCmm.jpg)
+
+數字類
+
+![w2v](https://imgur.com/V0UkL90.jpg)
+
+Investigate!
+
+![w2v](https://imgur.com/QGrYNjR.jpg)
+
+標點符號
+
+![w2v](https://imgur.com/n2NLpav.jpg)
+
+侵害傷害
+
+![w2v](https://imgur.com/aiYphGO.jpg)
+
+考績
+
+![w2v](https://imgur.com/dWWp023.jpg)
+
+
 # Work in progress
-  - [ ] parse the words
-  - [ ] embedding
+  - [x] parse the words
+  - [x] embedding
+  - [ ] tensorflow embedding
   - [ ] migrate to docker 
