@@ -77,6 +77,13 @@ urllib3==1.23
 
 # Test & Demo
 ![php](https://imgur.com/Uc8SP1f.jpg)
+Scheme
+| column name     	| type         	| encoding    	| Null     	| Other          	| description          	|
+|-----------------	|--------------	|-------------	|----------	|----------------	|----------------------	|
+| ID(primary key) 	| int(11)      	|             	| NOT NULL 	| AUTO_INCREMENT 	|  法條索引鍵(唯一)    	|
+| LawName         	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條名稱             	|
+| ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
+| ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
 # Work in progress
   - [ ] parse the words
