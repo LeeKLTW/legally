@@ -8,7 +8,15 @@ import pymysql
 FLAGS = None
 
 def __read_targets_from_json__():
-    return list(json.loads(''.join([line for line in open('targets.json','r',encoding="UTF8")])).values())
+    """
+    """
+    # return list(json.loads(''.join([line for line in open('targets.json','r',encoding="UTF8")])).values())
+    json_file = ''
+    with open('targets.json','r',encoding="UTF8") as f:
+        for line in f:
+            json_file += line
+    targets = json.loads(json_file).values()
+    return targets
 
 def __get_links__(url):
     """
@@ -31,7 +39,7 @@ def __get_law_content__(url):
     return [i for i in zip(cycle([title]),number,content)]
 
 
-def __write_into_mysql__(host,port,user,password):
+def __write_into_mysql__(host,port,user,password,law_content):
     """Write the information of article into MongoDB.
     Args:
         
