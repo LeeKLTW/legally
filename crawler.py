@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+""" 
+Crawling laws.
+"""
 import os
 import json
 import requests
