@@ -60,22 +60,49 @@ For example,in  this category['行政院本部消費者保護目'](https://law.m
 # Dependency
 MySQL
 
-pip install -r requirement.txt
-(requirement.txt)
-```
-certifi==2018.8.24
-chardet==3.0.4
-idna==2.7
-requests==2.19.1
-urllib3==1.23
-```
+For python package, please check out [requirements.txt](./requirements.txt)
 
 (Recently using virtualenv for enviroment management. Migrating to docker.)
 
 # Insallation
+1. install mySQL(make sure you have root authority. )
 
+2. clone this project
+
+```
+https://github.com/LeeKLTW/legally
+```
+
+3. install dependency
+```
+pip install -r requirement.txt
+```
 
 # Test & Demo
+1. crawl the law from website
+```
+python crawler
+```
+
+```
+usage: crawler.py [-h] [--host HOST] [--port PORT] [--user USER]
+                  [--password PASSWORD]
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --host HOST          The host of MySQL
+  --port PORT          The port of MySQL
+  --user USER          User account of MySQL
+  --password PASSWORD  User password of MySQL
+```
+
+2. word embedding
+install jupyter notebook
+in your command line
+```
+jupyter notebook
+```
+
 ![cmd](https://imgur.com/5hNVGe7.jpg)
 
 ![php](https://imgur.com/Uc8SP1f.jpg)
@@ -88,6 +115,9 @@ Scheme
 | LawName         	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條名稱             	|
 | ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
+
+全圖
+![w2v](./images/size=200_sg=1_window=4_iter=1_min_count_5.png)
 
 很棒棒
 
@@ -129,5 +159,6 @@ Investigate!
 # Work in progress
   - [x] parse the words
   - [x] embedding
+  - [ ] more iteration and higher min counts 
   - [ ] tensorflow embedding
   - [ ] migrate to docker 
