@@ -81,7 +81,7 @@ pip install -r requirement.txt
 # Test & Demo
 1. crawl the law from website
 ```
-python crawler
+python crawler.py
 ```
 
 ```
@@ -96,18 +96,15 @@ optional arguments:
   --password PASSWORD  User password of MySQL
 ```
 
-2. word embedding
-install jupyter notebook
-in your command line
-```
-jupyter notebook
-```
+During crawling, you will see some message as below.( Reminder:Total rows in database might be different.)
 
 ![cmd](https://imgur.com/5hNVGe7.jpg)
 
+The data will store in MySQL as below:
+
 ![php](https://imgur.com/Uc8SP1f.jpg)
 
-Scheme
+Just as a reminder, the scheme of database is shown below.
 
 | column name     	| type         	| encoding    	| Null     	| Other          	| description          	|
 |-----------------	|--------------	|-------------	|----------	|----------------	|----------------------	|
@@ -116,49 +113,80 @@ Scheme
 | ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
+2. word embedding
+install jupyter notebook
+
+in your command line
+```
+jupyter notebook
+```
+
+execute ```word2vec.ipynb```
+In this file we will use word2vec to do word embedding.
+
+And we will use [T-SNE](http://scikit-learn.org/stable/modules/manifold.html#t-distributed-stochastic-neighbor-embedding-t-sne) for dimesion reduction for visualization. PCA is available too!
+
+
+
+
 全圖
-![w2v](./images/size=200_sg=1_window=4_iter=1_min_count_5.png)
-
-很棒棒
-
-![w2v](https://imgur.com/69UZOjU.jpg)
-
-負面金錢往來
-
-![w2v](https://imgur.com/utUNyDS.jpg)
-
-死亡、艱難等負面字眼
-
-![w2v](https://imgur.com/rpE5YKi.jpg)
-
-英文字母
-
-![w2v](https://imgur.com/F15vCmm.jpg)
-
-數字類
-
-![w2v](https://imgur.com/V0UkL90.jpg)
-
-Investigate!
-
-![w2v](https://imgur.com/QGrYNjR.jpg)
-
-標點符號
-
-![w2v](https://imgur.com/n2NLpav.jpg)
-
-侵害傷害
-
-![w2v](https://imgur.com/aiYphGO.jpg)
+![w2v](./images/size200_sg_1_window4_iter_20_min_40.png)
 
 考績
 
-![w2v](https://imgur.com/dWWp023.jpg)
+![w2v](./images/image1.png)
+
+傷害、侵害
+
+![w2v](./images/image2.png)
+
+investigate
+
+![w2v](./images/image3.png)
+
+負面金錢往來
+
+![w2v](./images/image4.png)
+
+正面詞彙（風險降低）
+
+![w2v](./images/image5.png)
+
+證券金融市場
+
+![w2v](./images/image6.png)
+
+公司
+
+![w2v](./images/image7.png)
+
+組織單位
+
+![w2v](./images/image8.png)
+
+會計審計
+
+![w2v](./images/image9.png)
+
+保險
+
+![w2v](./images/image10.png)
+
+證券化
+
+![w2v](./images/image11.png)
+
+依cos 相似度查詢
+
+![w2v](./images/image12.png)
+
+$cos( \theta )=\frac{x\cdot y}{||x|| ||y||}$
 
 
 # Work in progress
   - [x] parse the words
   - [x] embedding
   - [ ] more iteration and higher min counts 
-  - [ ] tensorflow embedding
+  - [ ] [tensorflow embedding](https://www.tensorflow.org/tutorials/representation/word2vec) (From negative sampling to [NCE](https://papers.nips.cc/paper/5165-learning-word-embeddings-efficiently-with-noise-contrastive-estimation.pdf))
   - [ ] migrate to docker 
+  - [ ] crawl Official document
