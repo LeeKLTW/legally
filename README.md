@@ -114,6 +114,7 @@ Just as a reminder, the scheme of database is shown below.
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
 2. word embedding
+
 install jupyter notebook
 
 in your command line
@@ -124,6 +125,13 @@ jupyter notebook
 execute ```word2vec.ipynb```
 In this file we will use word2vec to do word embedding.
 
+And don't forget to set your font property
+
+e.g.
+```
+font=FontProperties(fname='/Library/Fonts/標楷體.ttf',size=40)
+```
+
 And we will use [T-SNE](http://scikit-learn.org/stable/modules/manifold.html#t-distributed-stochastic-neighbor-embedding-t-sne) for dimesion reduction for visualization. PCA is available too!
 
 
@@ -131,6 +139,8 @@ And we will use [T-SNE](http://scikit-learn.org/stable/modules/manifold.html#t-d
 
 全圖
 ![w2v](./images/size200_sg_1_window4_iter_20_min_40.png)
+
+Let's have a closer look.
 
 考績
 
