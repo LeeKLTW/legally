@@ -23,7 +23,7 @@ def __read_targets_from_json__(path='targets.json'):
     targets = json.loads(json_file).values()
     return targets
 
-def __get_links__(url):
+def __get_links_list__(url):
     """Get the of webpage to get law content.
     Args:
         url: string. 組改後法規類目別網址。e.g.行政院院本部消費者保護目https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04001004
@@ -32,8 +32,8 @@ def __get_links__(url):
     """
     html = requests.get(url).text
     soup = BeautifulSoup(html,'html.parser')
-    links = ['https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode='+i['href'].replace('../Hot/AddHotLaw.ashx?PCode=','') for i in soup.select('table tr td a') if i['href'].startswith('../Hot/AddHotLaw.ashx?PCode=')]
-    return links
+    links_list = ['https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode='+i['href'].replace('../Hot/AddHotLaw.ashx?PCode=','') for i in soup.select('table tr td a') if i['href'].startswith('../Hot/AddHotLaw.ashx?PCode=')]
+    return links_list
 
 def __get_law_content__(url):
     """Get law content.
@@ -56,7 +56,7 @@ def __create_database__():
     Returns:None
     """
     print('Connecting database')
-    conn = pymysql.Connection(host='localhost',port=3306,user='root',password='',charset='utf8') # utf8 to correct encoding    collection = client.get_database('AI_news_tracker').get_collection('article')
+    conn = pymysql.Connection(host='localhost',port=3306,user='root',password='',charset='utf8') # utf8 to correct encoding
     cur = conn.cursor()
     cur.execute('CREATE DATABASE IF NOT EXISTS legally;')
     cur.execute('USE legally;')
@@ -83,21 +83,12 @@ def __write_into_mysql__(content,host,port,user,password):
     Returns:
         None
     """
-    conn = pymysql.Connection(host='localhost',port=3306,user='root',password='',charset='utf8') # utf8 to correct encoding    collection = client.get_database('AI_news_tracker').get_collection('article')
+    conn = pymysql.Connection(host=host,port=port,user=user,password=password,charset='utf8') # utf8 to correct encoding
     cur = conn.cursor()
     cur.execute("USE legally;")
-    cur.execute("SELECT DISTINCT LawName FROM Law;")
-    stored = [i[0] for i in cur.fetchall()]
-    # print(stored)
-    if content[0] in stored:
-        cur.execute("SELECT DISTINCT ActNO FROM Law WHERE LawName = '{}'".format(content[0]))
-        if int(content[1]) in [i[0] for i in cur.fetchall()]:
-            print('Whole or part of law is already stored:',content[0],content[1])
-    else:
-        cur.execute("INSERT INTO Law(LawName,ActNO,ActContent) VALUES (%s, %s,%s)",(content[0], content[1], content[2]))
-        cur.connection.commit()
-        print('Inserted:',content[0],content[1])
-    conn.close()
+    cur.execute("INSERT INTO Law(LawName,ActNO,ActContent) VALUES (%s, %s,%s)",(content[0], content[1], content[2]))
+    cur.connection.commit()
+    print('Inserted:',content[0],content[1])
     return
 
 def main(host,port,user,password):
@@ -110,24 +101,49 @@ def main(host,port,user,password):
     Returns: None
     """
     targets = __read_targets_from_json__()
-    links = [ __get_links__(url) for url in targets]
+    print('Load targets from json')
+    links_list = [ __get_links_list__(url) for url in targets]
+
+    # links_list = [ __get_links_list__(url) for url in ['https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04018003']]
+
     contents = []
-    for link in links:
-        contents.extend(__get_law_content__(link))
+    for links in links_list:
+        for link in links:
+            print('Link found',link)
+            try:
+                contents.extend(__get_law_content__(link))
+            except requests.exceptions.InvalidSchema:
+                pass
 
     # Create databse 
     print('Connecting database')
-    conn = pymysql.Connection(host=host,port=port,user=user,password=password,charset='utf8') # utf8 to correct encoding    collection = client.get_database('AI_news_tracker').get_collection('article')
+    conn = pymysql.Connection(host=host,port=port,user=user,password=password,charset='utf8') # utf8 to correct encoding
     cur = conn.cursor()
-
     print('Create database if not exists.')
     if not cur.execute("SHOW DATABASES LIKE 'legally';"):
         __create_database__()
 
     for content in contents:
-        __write_into_mysql__(content=content,host=host,port=port,user=user,password=password,password='')
+        cur = conn.cursor()
+        cur.execute('USE legally;')
+        cur.execute("SELECT DISTINCT LawName FROM Law;")
+        stored = [i[0] for i in cur.fetchall()]
+        if content[0] in stored:
+            cur.execute('USE legally;')
+            cur.execute("SELECT DISTINCT ActNO FROM Law WHERE LawName = '{}'".format(content[0]))
+            try:
+                if int(content[1]) in [i[0] for i in cur.fetchall()]:
+                    print('Whole or part of law is already stored:',content[0],content[1])
+                else:
+                    __write_into_mysql__(content=content,host=host,port=port,user=user,password=password)
+            except ValueError:
+                pass
+        else:
+            __write_into_mysql__(content=content,host=host,port=port,user=user,password=password)
 
     print('Done inserting to DB')
+    conn = pymysql.Connection(host=host,port=port,user=user,password=password,charset='utf8') # utf8 to correct encoding
+    cur = conn.cursor()
     cur.execute('USE legally;')
     cur.execute('SELECT COUNT(*) FROM Law')
     print('The number of documnets in database now is:',cur.fetchall()[0][0])
