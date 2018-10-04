@@ -1,12 +1,12 @@
 # Why I start this project
-減少法律遵循人力需求
+1. 減少法律遵循人力需求，當公文出現時，推薦匹配法律條文建議，降低人為比對錯誤率。
 
-減少公文格式審核人力
+2. 減少公文格式審核人力
 
 # Technical possibility
 
 ## 全國法規資料庫&公文公開
-### Laws this project will crawl is included in the catagories below:
+### Laws this project will crawl is included in the catagories below:(You can check and modifiy it in targets.json)
     '行政院本部消費者保護目':'https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04001004',
     '財政部組織目'   :'https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04005001',
     '財政部綜合規劃目':'https://law.moj.gov.tw/LawClass/LawClassListN.aspx?TY=04005002',
