@@ -113,6 +113,9 @@ Just as a reminder, the scheme of database is shown below.
 | ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
+And Table Law in [CSV](Law.csv).
+
+
 2. word embedding
 
 install jupyter notebook
@@ -186,7 +189,7 @@ investigate
 
 ![w2v](./images/image11.png)
 
-依cos 相似度查詢
+依cos 相似度查詢
 
 ![w2v](./images/image12.png)
 
