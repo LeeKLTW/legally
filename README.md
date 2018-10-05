@@ -203,3 +203,4 @@ $cos( \theta )=\frac{x\cdot y}{||x|| ||y||}$
   - [ ] [tensorflow embedding](https://www.tensorflow.org/tutorials/representation/word2vec) (From negative sampling to [NCE](https://papers.nips.cc/paper/5165-learning-word-embeddings-efficiently-with-noise-contrastive-estimation.pdf))
   - [ ] migrate to docker 
   - [ ] crawl Official document
+  - [ ] webpage interface
