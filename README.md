@@ -53,6 +53,7 @@ For example,in  this category['行政院本部消費者保護目'](https://law.m
     金融消費爭議處理機構評議委員資格條件聘任解任及評議程序辦法
     金融消費者保護法
 
+
 公文來自台北公文公開資料
 ## Official document is easier to do POS, NER
 
@@ -204,3 +205,4 @@ $cos( \theta )=\frac{x\cdot y}{||x|| ||y||}$
   - [ ] migrate to docker 
   - [ ] crawl Official document
   - [ ] webpage interface
+  - [ ] Seq2Seq
