@@ -114,7 +114,7 @@ Just as a reminder, the scheme of database is shown below.
 | ActNo           	| int(11)      	|             	| Yes      	|                	| 法條編號,e.g.第 1 條 	|
 | ActContent      	| varchar(255) 	| utf8mb4_bin 	| Yes      	|                	| 法條內容             	|
 
-And Table Law in [CSV](Law.csv).
+And Table `Law` in [CSV](Law.csv).
 
 
 2. word embedding
