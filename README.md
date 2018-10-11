@@ -206,3 +206,4 @@ $cos( \theta )=\frac{x\cdot y}{||x|| ||y||}$
   - [ ] crawl Official document
   - [ ] webpage interface
   - [ ] Seq2Seq
+  - [ ] classification test
