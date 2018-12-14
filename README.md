@@ -1,3 +1,5 @@
+_potential security vulnerability package 'requests'_
+
 # Why I start this project
 1. 減少法律遵循人力需求，當公文出現時，推薦匹配法律條文建議，降低人為比對錯誤率。
 
